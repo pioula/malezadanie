@@ -12,7 +12,7 @@ int main() {
     
     while(readLine(&words)>0) {
         numberOfLines++;
-
+        
         switch (getType(words)) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
