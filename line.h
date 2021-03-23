@@ -22,4 +22,6 @@ void killLine(line *l);
 
 line separateNumbersFromWords(stringMatrix words);
 
+int compareLines (line firstLine, line secondLine);
+
 #endif /* WORDS_H */

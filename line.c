@@ -73,3 +73,23 @@ line separateNumbersFromWords(stringMatrix words) {
     return thisLine;
 }
 
+int compareLines (line firstLine, line secondLine) {
+    if (sizeStringMatrix(firstLine.words) != sizeStringMatrix(secondLine.words)
+    || sizeDoubleArray(firstLine.numbers) != sizeDoubleArray(secondLine.numbers)) {
+        return -1;
+    }
+    
+    for (int i = 0; i < sizeStringMatrix(firstLine.words); i++) {
+        if (compareWords(&(firstLine.words.T[i]), &(secondLine.words.T[i])) != 0) {
+            return -1;
+        }
+    }
+
+    for (int i = 0; i < sizeDoubleArray(firstLine.numbers); i++) {
+        if (getDouble(firstLine.numbers, i) != getDouble(secondLine.numbers, i)) {
+            return -1;
+        }
+    }
+
+    return 1;
+}

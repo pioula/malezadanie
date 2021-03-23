@@ -79,14 +79,9 @@ void lowerCapitalisation(stringMatrix *words) {
         lowerWord(getString(*words, i));
     }
 }
-
-static int myCompare(const void *a, const void *b) 
-{  
-    return memcmp(((string *)a)->T, ((string *)b)->T, sizeString(*((string *)a)));
-} 
    
 void sortWords(stringMatrix *words) 
 {  
-    qsort(words->T, sizeStringMatrix(*words), sizeof(string), myCompare); 
+    qsort(words->T, sizeStringMatrix(*words), sizeof(string), compareWords); 
 } 
 

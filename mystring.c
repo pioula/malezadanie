@@ -72,3 +72,8 @@ void lowerWord(string word) {
     }
 }
 
+int compareWords(const void *a, const void *b) 
+{  
+    return memcmp(((string *)a)->T, ((string *)b)->T, sizeString(*((string *)a)));
+} 
+

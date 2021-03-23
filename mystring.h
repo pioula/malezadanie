@@ -28,4 +28,6 @@ int readString(string *array);
 void printString(string array);
 
 void lowerWord(string word);
+
+int compareWords(const void *a, const void *b);
 #endif /* MYSTRING_H */

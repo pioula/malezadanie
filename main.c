@@ -39,5 +39,23 @@ int main() {
 
         clearStringMatrix(&words);
     }
+
+    for (int i = 0; i < sizeLineArray(lines); i++) {
+        if (getLine(lines, i).isWritten < 0) {
+            printf("%d",getLine(lines, i).row);
+            lines.T[i].isWritten = 1;
+
+            for (int j = i + 1; j < sizeLineArray(lines); j++) {
+                if (getLine(lines, j).isWritten < 0) {
+                    if (compareLines(getLine(lines, i), getLine(lines, j)) > 0) {
+                        
+                    }
+                }
+            }
+        }
+
+        printf("\n");
+    }
+
     killStringMatrix(&words);
 }
