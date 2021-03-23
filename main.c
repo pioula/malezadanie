@@ -48,7 +48,8 @@ int main() {
             for (int j = i + 1; j < sizeLineArray(lines); j++) {
                 if (getLine(lines, j).isWritten < 0) {
                     if (compareLines(getLine(lines, i), getLine(lines, j)) > 0) {
-                        
+                        printf("%d",getLine(lines, j).row);
+                        lines.T[j].isWritten = 1;
                     }
                 }
             }
