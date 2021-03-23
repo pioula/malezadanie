@@ -80,4 +80,14 @@ void lowerCapitalisation(stringMatrix *words) {
     }
 }
 
+ 
+static int myCompare(const void *a, const void *b) 
+{  
+    return strcmp(((string *)a)->T, ((string *)b)->T);
+} 
+   
+void sortWords(stringMatrix *words) 
+{  
+    qsort(words->T, sizeStringMatrix(*words), sizeof(string), myCompare); 
+} 
 
