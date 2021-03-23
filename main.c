@@ -20,12 +20,12 @@ int main() {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
-
+                
                 lowerCapitalisation(&(thisLine.words));
 
                 sortWords(&(thisLine.words));
                 sortNumbers(&(thisLine.numbers));
-                
+
                 pushBackLineArray(&lines, thisLine);
                 break;
             }
