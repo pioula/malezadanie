@@ -42,21 +42,22 @@ int main() {
 
     for (int i = 0; i < sizeLineArray(lines); i++) {
         if (getLine(lines, i).isWritten < 0) {
-            printf("%d",getLine(lines, i).row);
+            printf("%d ",getLine(lines, i).row);
             lines.T[i].isWritten = 1;
 
             for (int j = i + 1; j < sizeLineArray(lines); j++) {
                 if (getLine(lines, j).isWritten < 0) {
                     if (compareLines(getLine(lines, i), getLine(lines, j)) > 0) {
-                        printf("%d",getLine(lines, j).row);
+                        printf("%d ",getLine(lines, j).row);
                         lines.T[j].isWritten = 1;
                     }
                 }
             }
-        }
 
-        printf("\n");
+            printf("\n");
+        }
     }
 
+    killLineArray(&lines);
     killStringMatrix(&words);
 }
