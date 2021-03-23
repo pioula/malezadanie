@@ -4,7 +4,7 @@
 struct String {
     char *T;
     int numberOfChars;
-    long unsigned int allocatedMemory;
+    size_t allocatedMemory;
 };
 
 typedef struct String string;

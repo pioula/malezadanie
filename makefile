@@ -1,5 +1,5 @@
 CC     = gcc
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -std=c11
 
 .c.o:
 	gcc $(CFLAGS) -c $<

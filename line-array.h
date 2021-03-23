@@ -5,7 +5,7 @@
 struct LineArray {
     line *T;
     int numberOfElements;
-    long unsigned int allocatedMemory;
+    size_t allocatedMemory;
 };
 
 typedef struct LineArray lineArray;

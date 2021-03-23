@@ -10,13 +10,13 @@
 
 int main() {
     int numberOfLines = 0;
-    lineArray lines = newLineArray(); 
+    //lineArray lines = newLineArray(); 
     stringMatrix words = newStringMatrix();
     
     while(readLine(&words)>0) {
         numberOfLines++;
         
-        switch (getType(words)) {
+        /*switch (getType(words)) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
@@ -36,11 +36,11 @@ int main() {
                 fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
         }
-
+*/
         clearStringMatrix(&words);
     }
 
-    for (int i = 0; i < sizeLineArray(lines); i++) {
+    /*for (int i = 0; i < sizeLineArray(lines); i++) {
         if (getLine(lines, i).isWritten < 0) {
             printf("%d ",getLine(lines, i).row);
             lines.T[i].isWritten = 1;
@@ -56,8 +56,8 @@ int main() {
 
             printf("\n");
         }
-    }
+    }*/
 
-    killLineArray(&lines);
+    //killLineArray(&lines);
     killStringMatrix(&words);
 }

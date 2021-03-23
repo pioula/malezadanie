@@ -4,7 +4,7 @@
 struct DoubleArray {
     long double *T;
     int numberOfElements;
-    long unsigned int allocatedMemory;
+    size_t allocatedMemory;
 };
 
 typedef struct DoubleArray doubleArray;

@@ -15,7 +15,8 @@ static int checkType(char letter, int position) {
 }
 
 static void splitToWords(string line, stringMatrix *words) {
-    string word = newString();
+    
+    string word = newString(1);
     
     for (int i = 0; i < sizeString(line); i++) {
         int type = checkType(getChar(line, i), i); 
@@ -39,12 +40,14 @@ static void splitToWords(string line, stringMatrix *words) {
 }
 
 int readLine(stringMatrix *lineOfWords) { //zwraca 1 jezeli udalo sie wczytac -1 w przeciwnym przypadku
-    string wholeLine = newString();
+    string wholeLine = newString(1);
 
     int length = readString(&wholeLine);
 
-    if (length == -1)
+    if (length == -1) {
+        killString(&wholeLine);
         return -1;
+    }
 
     pushBackString(&wholeLine, '\n'); //zapewnia wejscie do linii 32
 

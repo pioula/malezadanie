@@ -40,7 +40,7 @@ static void reallocMemory(stringMatrix *array) {      //Sprawdza czy skonczyla s
 
 void pushBackStringMatrix(stringMatrix *array, string c) {     //wrzuca na sam koniec element c
     reallocMemory(array);  
-
+    
     array->T[array->numberOfStrings] = newString();
     
     for (int i = 0; i < sizeString(c); i++) {
@@ -67,7 +67,7 @@ void clearStringMatrix(stringMatrix *array) {     //czysci cala tablice
 }
 
 void killStringMatrix(stringMatrix *array) {      //usuwa tablice z pamieci
-    for (int i = 0; i < sizeStringMatrix(*array); i++) {
+    for (int i = 0; i < (int)array->allocatedMemory; i++) {
         killString(&((*array).T[i]));
     }
     
