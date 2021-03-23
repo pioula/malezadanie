@@ -7,6 +7,7 @@ struct StringMatrix {
     string *T;
     int numberOfStrings;
     size_t allocatedMemory;
+    int maxNumberOfWords;
     int whatTypeOfLineItIs; //0 - comparable/ 1 - comment or empty/ 2 - error
 };
 

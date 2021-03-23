@@ -11,6 +11,7 @@ typedef struct StringMatrix stringMatrix;
 stringMatrix newStringMatrix() {
     stringMatrix new;
     new.numberOfStrings = 0;
+    new.maxNumberOfWords = 0;
     new.allocatedMemory = 1;
     new.whatTypeOfLineItIs = 0;
     new.T = (string*)malloc(new.allocatedMemory * sizeof(string));
@@ -40,14 +41,16 @@ static void reallocMemory(stringMatrix *array) {      //Sprawdza czy skonczyla s
 
 void pushBackStringMatrix(stringMatrix *array, string c) {     //wrzuca na sam koniec element c
     reallocMemory(array);  
-    
-    array->T[array->numberOfStrings] = newString();
+    if (array->maxNumberOfWords <= array->numberOfStrings)
+        array->T[array->numberOfStrings] = newString();
     
     for (int i = 0; i < sizeString(c); i++) {
         pushBackString(&(array->T[array->numberOfStrings]), getChar(c, i));
     }
 
     array->numberOfStrings++;
+    if (array->maxNumberOfWords < array->numberOfStrings)
+        array->maxNumberOfWords = array->numberOfStrings;
 }
 
 void setType(stringMatrix *array, int type) {
