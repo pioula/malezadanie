@@ -23,10 +23,7 @@ int main() {
                 sortWords(&(thisLine.words));
                 sortNumbers(&(thisLine.numbers));
                 
-                for (int i = 0; i < sizeDoubleArray(thisLine.numbers); i++) {
-                    printf("%Lf\n", getDouble(thisLine.numbers, i));
-                }
-                //wrzuc line na strukturke
+                
                 break;
             }
             case 1:     //comment/empty line - nothing to do
