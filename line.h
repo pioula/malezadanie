@@ -18,4 +18,6 @@ stringMatrix getWords(line l);
 
 void killLine(line *l);
 
+line separateNumbersFromWords(stringMatrix words);
+
 #endif /* WORDS_H */

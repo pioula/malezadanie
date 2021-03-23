@@ -4,7 +4,6 @@
 #include "mystring-matrix.h"
 #include "input.h"
 #include "line.h"
-#include "words.h"
 
 int main() {
     int numberOfLines = 0;
@@ -18,8 +17,8 @@ int main() {
                 line thisLine = separateNumbersFromWords(words);
                 lowerCapitalisation(&(thisLine.words));
 
-                sortWords(&(thisLine.words));
-                sortNumbers(&(thisLine.numbers));
+                //sortWords(&(thisLine.words));
+                //sortNumbers(&(thisLine.numbers));
                 
                 //wrzuc line na strukturke
                 break;

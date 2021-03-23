@@ -26,4 +26,6 @@ void killString(string *array);
 int readString(string *array);
 
 void printString(string array);
+
+void lowerWord(string word);
 #endif /* MYSTRING_H */

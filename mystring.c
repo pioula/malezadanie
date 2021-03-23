@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "mystring.h"
 
 struct String;
@@ -63,5 +64,11 @@ void printString(string array) {
         printf("%c",getChar(array, i));
     }
     puts("");
+}
+
+void lowerWord(string word) {
+    for (int i = 0; i < sizeString(word); ++i) {
+        setChar(&word, i, tolower(getChar(word, i)));
+    }
 }
 

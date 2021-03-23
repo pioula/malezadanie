@@ -30,4 +30,6 @@ void setType(stringMatrix *array, int type);
 
 int getType(stringMatrix array);
 
+void lowerCapitalisation(stringMatrix *words); 
+
 #endif /* MYSTRING_MATRIX_H */

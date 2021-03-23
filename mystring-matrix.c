@@ -74,4 +74,10 @@ void killStringMatrix(stringMatrix *array) {      //usuwa tablice z pamieci
     free(array->T);
 }
 
+void lowerCapitalisation(stringMatrix *words) {
+    for (int i = 0; i < sizeStringMatrix(*words); ++i) {
+        lowerWord(getString(*words, i));
+    }
+}
+
 
