@@ -12,6 +12,8 @@ line newLine() {
     line new;
     new.words = newStringMatrix();
     new.numbers = newDoubleArray();
+    new.row = -1;
+    new.isWritten = -1;
 
     return new;
 }

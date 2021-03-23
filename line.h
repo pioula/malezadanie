@@ -6,6 +6,8 @@
 struct Line {
     doubleArray numbers;
     stringMatrix words;
+    int row;
+    int isWritten;
 };
 
 typedef struct Line line;
