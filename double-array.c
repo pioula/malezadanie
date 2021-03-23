@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "double-array.h"
 
 struct DoubleArray;
@@ -51,4 +52,12 @@ void killDoubleArray(doubleArray *array) {      //usuwa tablice z pamieci
     free(array->T);
 }
 
-
+static int myCompare(const void *a, const void *b) 
+{  
+    return *((long double *)a) - *((long double *)b);
+} 
+   
+void sortNumbers(doubleArray *numbers) 
+{  
+    qsort(numbers->T, sizeDoubleArray(*numbers), sizeof(long double), myCompare); 
+}

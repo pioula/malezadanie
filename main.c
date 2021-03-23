@@ -1,10 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "mystring.h"
 #include "mystring-matrix.h"
 #include "input.h"
 #include "line.h"
-#include <string.h>
+#include "double-array.h"
+
 
 int main() {
     int numberOfLines = 0;
@@ -19,8 +21,11 @@ int main() {
                 lowerCapitalisation(&(thisLine.words));
                 
                 sortWords(&(thisLine.words));
-                //sortNumbers(&(thisLine.numbers));
+                sortNumbers(&(thisLine.numbers));
                 
+                for (int i = 0; i < sizeDoubleArray(thisLine.numbers); i++) {
+                    printf("%Lf\n", getDouble(thisLine.numbers, i));
+                }
                 //wrzuc line na strukturke
                 break;
             }

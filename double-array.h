@@ -23,4 +23,6 @@ void clearDoubleArray(doubleArray *array);
 
 void killDoubleArray(doubleArray *array);
 
+void sortNumbers(doubleArray *numbers);
+
 #endif /* DOUBLE_ARRAY_H */
