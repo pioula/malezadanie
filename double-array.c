@@ -41,13 +41,6 @@ void pushBackDouble(doubleArray *array, long double c) {     //wrzuca na sam kon
     array->numberOfElements++;
 }
 
-void clearDoubleArray(doubleArray *array) {     //czysci cala tablice
-    for (int i = 0; i < sizeDoubleArray(*array); i++) {
-        setDouble(array, i, 0);
-    }
-    array->numberOfElements = 0;
-}
-
 void killDoubleArray(doubleArray *array) {      //usuwa tablice z pamieci
     free(array->T);
 }

@@ -19,8 +19,6 @@ int sizeDoubleArray(doubleArray array);
 
 void pushBackDouble(doubleArray *array, long double c);
 
-void clearDoubleArray(doubleArray *array);
-
 void killDoubleArray(doubleArray *array);
 
 void sortNumbers(doubleArray *numbers);
