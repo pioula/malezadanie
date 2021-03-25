@@ -70,7 +70,7 @@ void clearStringMatrix(stringMatrix *array) {     //czysci cala tablice
 }
 
 void killStringMatrix(stringMatrix *array) {      //usuwa tablice z pamieci
-    for (int i = 0; i < (int)array->allocatedMemory; i++) {
+    for (int i = 0; i < (int)array->maxNumberOfWords; i++) {
         killString(&((*array).T[i]));
     }
     

@@ -46,7 +46,6 @@ static bool isNumber(string word, long double *number) {
             return !isNaN(*number);
         }
     }
-    printString(word);
 
     long double anyNumber = strtold(word.T, &endptr);
     if(endptr == word.T + sizeString(word)) {
