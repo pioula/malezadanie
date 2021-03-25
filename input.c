@@ -27,6 +27,7 @@ static void splitToWords(string line, stringMatrix *words) {
         }
         else if ((9 <= getChar(line, i) && getChar(line, i) <= 13) || getChar(line, i) == ' ') {
             if (sizeString(word) > 0) {
+                pushBackString(&word,'\0');
                 pushBackStringMatrix(words, word);
                 clearString(&word);
             }            
