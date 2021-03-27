@@ -21,10 +21,6 @@ void pushBackWord(array *t, array word) {     //wrzuca na sam koniec element c
         t->maxNumberOfElements = t->size;
 }
 
-void setTypeOfLine(array *t, int typeOfLine) {
-    t->typeOfLine = typeOfLine;
-}
-
 void clearString(array *t) {     //czysci cala tablice
     t->T.letters = memset(t->T.letters,0,t->size * sizeof(char));
     t->size = 0;

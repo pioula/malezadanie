@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include "input.h"
-#include "mystring.h"
-#include "mystring-matrix.h"
-
+#include "array.h"
+#include "my-string.h"
 
 static int checkType(char letter, int position) {
     if (position == 0 && letter == '#') 
@@ -14,49 +13,52 @@ static int checkType(char letter, int position) {
     return 0;
 }
 
-static void splitToWords(string line, stringMatrix *words) {
+static void splitToWords(array line, array *words) {
     
-    string word = newString();
+    array word = newArray(sizeof(char));
     
-    for (int i = 0; i < sizeString(line); i++) {
-        int type = checkType(getChar(line, i), i); 
+    for (int i = 0; i < line.size; i++) {
+        int type = checkType(line.T.letters[i], i); 
 
         if (type != 0) {
-            setType(words, type);
+            words->typeOfLine = type;
             break;
         }
-        else if ((9 <= getChar(line, i) && getChar(line, i) <= 13) || getChar(line, i) == ' ') {
-            if (sizeString(word) > 0) {
-                pushBackString(&word,'\0');
-                pushBackStringMatrix(words, word);
+        else if ((9 <= line.T.letters[i] && line.T.letters[i] <= 13) || line.T.letters[i] == ' ') {
+            if (word.size > 0) {
+                addOne(&word);
+                word.T.letters[word.size-1] = '\0';
+                pushBackWord(words, word);
                 clearString(&word);
             }            
         }
         else {
-            pushBackString(&word, getChar(line, i));
+            addOne(&word);
+            word.T.letters[word.size - 1] = line.T.letters[i];
         }
     }
 
-    killString(&word);
+    killArray(&word);
 }
 
-int readLine(stringMatrix *lineOfWords) { //zwraca 1 jezeli udalo sie wczytac -1 w przeciwnym przypadku
-    string wholeLine = newString();
+int readLine(array *lineOfWords) { //zwraca 1 jezeli udalo sie wczytac -1 w przeciwnym przypadku
+    array wholeLine = newArray(sizeof(char));
 
     int length = readString(&wholeLine);
 
     if (length == -1) {
-        killString(&wholeLine);
+        killArray(&wholeLine);
         return -1;
     }
 
-    pushBackString(&wholeLine, '\n'); //zapewnia wejscie do linii 32
+    addOne(&wholeLine);
+    wholeLine.T.letters[wholeLine.size - 1] = '\n'; //zapewnia wejscie do linii 32
 
     splitToWords(wholeLine, lineOfWords);
 
-    if (sizeStringMatrix(*lineOfWords) == 0 && getType(*lineOfWords) == 0)
-        setType(lineOfWords, 1);
+    if (lineOfWords->size == 0 && lineOfWords->typeOfLine == 0)
+        lineOfWords->typeOfLine = 1;
         
-    killString(&wholeLine);
+    killArray(&wholeLine);
     return 1;  
 }

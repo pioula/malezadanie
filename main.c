@@ -1,22 +1,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "mystring.h"
-#include "mystring-matrix.h"
 #include "input.h"
-#include "line.h"
-#include "double-array.h"
-#include "line-array.h"
+#include "array.h"
+#include "my-string.h"
 
 int main() {
     int numberOfLines = 0;
-    lineArray lines = newLineArray(); 
-    stringMatrix words = newStringMatrix();
+    //lineArray lines = newLineArray(); 
+    array words = newArray(sizeof(array));
     
     while(readLine(&words)>0) {
         numberOfLines++;
         
-        switch (getType(words)) {
+       /* switch (getType(words)) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
@@ -35,12 +32,12 @@ int main() {
             case 2:     //error line
                 fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
-        }
+        }*/
 
-        clearStringMatrix(&words);
+        clearWords(&words);
     }
 
-    for (int i = 0; i < sizeLineArray(lines); i++) {
+    /*for (int i = 0; i < sizeLineArray(lines); i++) {
         if (getLine(lines, i).isWritten < 0) {
             printf("%d ",getLine(lines, i).row);
             lines.T[i].isWritten = 1;
@@ -58,6 +55,6 @@ int main() {
         }
     }
 
-    killLineArray(&lines);
-    killStringMatrix(&words);
+    killLineArray(&lines);*/
+    killMatrix(&words);
 }

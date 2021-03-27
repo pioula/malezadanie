@@ -9,20 +9,17 @@ all: program test
 test: test.o
 	gcc -o test test.o
 
-program: main.o mystring.o mystring-matrix.o input.o double-array.o line.o line-array.o
-	gcc -o program main.o mystring.o mystring-matrix.o input.o double-array.o line.o line-array.o
+program: main.o input.o my-string.o array.o
+	gcc -o program main.o input.o my-string.o array.o
 
 test.o: test.c test.h
 
-mystring.o: mystring.c mystring.h
-double-array.o: double-array.c double-array.h
-mystring-matrix.o: mystring-matrix.c mystring-matrix.h mystring.o
-line.o: line.c line.h mystring-matrix.o double-array.o
-line-array.o: line-array.c line-array.h line.o
+array.o: array.c array.h
+my-string.o: my-string.c my-string.h array.o
 
-input.o: input.c input.h mystring.o mystring-matrix.o
+input.o: input.c input.h my-string.o array.o
 
-main.o: main.c mystring.o mystring-matrix.o input.o double-array.o line.o line-array.o
+main.o: main.c my-string.o input.o array.o
 
 clean:
 	rm -f *.o program

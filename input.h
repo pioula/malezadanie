@@ -1,8 +1,8 @@
-#include "mystring-matrix.h"
+#include "array.h"
 
 #ifndef INPUT_H
 #define INPUT_H
 
-int readLine(stringMatrix *lineOfWords);
+int readLine(array *lineOfWords);
 
 #endif /* INPUT_H */
