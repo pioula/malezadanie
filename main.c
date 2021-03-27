@@ -42,13 +42,13 @@ int main() {
 
     for (int i = 0; i < lines.size; i++) {
         if (lines.T.lines[i].isWritten < 0) {
-            printf("%d ",lines.T.lines[i].row);
+            printf("%d",lines.T.lines[i].row);
             lines.T.lines[i].isWritten = 1;
 
             for (int j = i + 1; j < lines.size; j++) {
                 if (lines.T.lines[j].isWritten < 0) {
                     if (compareLines(lines.T.lines[i], lines.T.lines[j]) > 0) {
-                        printf("%d ",lines.T.lines[j].row);
+                        printf(" %d",lines.T.lines[j].row);
                         lines.T.lines[j].isWritten = 1;
                     }
                 }

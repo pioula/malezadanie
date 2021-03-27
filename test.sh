@@ -13,10 +13,9 @@ MYPATH=$2;
 
 for f in $MYPATH/*.in;
 do
-    $PROGRAM < "$f" > 1.out;
-    $PROGRAM < "$f" 2> 1.err;
-    echo "TEST $f ";
-    if diff "${f%in}out" 1.out;
+    $PROGRAM < "$f" > $OUT 2> $ERR;
+    echo -n "TEST $f ";
+    if diff "${f%in}out" "$OUT" && diff "${f%in}err" "$ERR";
     then
         echo "PASSED";
     else
