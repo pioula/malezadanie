@@ -1,18 +1,12 @@
 #include "array.h"
-#ifndef LINE_H
-#define LINE_H
-
-struct Line {
-    array numbers, words;
-    int row;
-    int isWritten;
-};
-
-typedef struct Line line;
+#ifndef LINE_FUNCTIONS_H
+#define LINE_FUNCTIONS_H
 
 line newLine();
 
 void killLine(line *l);
+
+void killLineArray(array *t);
 
 line separateNumbersFromWords(array words);
 

@@ -2,6 +2,10 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
+struct Line;
+
+typedef struct Line line;
+
 struct Array;
 
 typedef struct Array array;
@@ -11,6 +15,7 @@ union type_t{
     void *memory;
     char* letters;
     long double* numbers;
+    line *lines;
 };
 
 typedef union type_t type_t; 
@@ -19,6 +24,12 @@ struct Array {
     type_t T;
     size_t allocatedMemory, type;
     int size, maxNumberOfElements, typeOfLine;
+};
+
+struct Line {
+    array numbers, words;
+    int row;
+    int isWritten;
 };
 
 array newArray(size_t type);

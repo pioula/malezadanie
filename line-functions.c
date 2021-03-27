@@ -1,11 +1,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "array.h"
-#include "line.h"
-
-struct Line;
-
-typedef struct Line line;
+#include "line-functions.h"
+#include "my-string.h"
 
 line newLine() {
     line new;
@@ -22,6 +19,13 @@ void killLine(line *l) {      //usuwa tablice z pamieci
     killMatrix(&(l->words));
 }
 
+void killLineArray(array *t) {      //usuwa tablice z pamieci
+    for (int i = 0; i < t->size; i++) {
+        killLine(&(t->T.lines[i]));
+    }
+    
+    free(t->T.lines);
+}
 
 static bool isNaN (long double number) {
     return number != number;
@@ -30,7 +34,7 @@ static bool isNaN (long double number) {
 static bool isNumber(array word, long double *number) {
     char *endptr;
 
-    if (getChar(word, 0) == '0') {
+    if (word.T.letters[0] == '0') {
         unsigned long long unsignedOct = strtoull(word.T.letters, &endptr, 8);
         if(endptr == word.T.letters + word.size- 1) {
             *number = (long double)unsignedOct;

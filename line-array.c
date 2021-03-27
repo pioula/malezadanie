@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "array.h"
 #include "line-array.h"
-#include "line.h"
 
 struct LineArray;
 

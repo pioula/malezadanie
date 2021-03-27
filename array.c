@@ -9,6 +9,10 @@ struct Array;
 
 typedef struct Array array;
 
+struct Line;
+
+typedef struct Line line;
+
 array newArray(size_t type) {
     array new;
     new.size = 0;
@@ -45,3 +49,4 @@ void killMatrix(array *t) {      //usuwa tablice z pamieci
     
     free(t->T.matrix);
 }
+

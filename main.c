@@ -4,17 +4,18 @@
 #include "input.h"
 #include "array.h"
 #include "my-string.h"
-#include "line.h"
+#include "line-functions.h"
+#include "my-double.h"
 
 int main() {
     int numberOfLines = 0;
-    //lineArray lines = newLineArray(); 
+    array lines = newArray(sizeof(line)); 
     array words = newArray(sizeof(array));
     
     while(readLine(&words)>0) {
         numberOfLines++;
         
-        switch (getType(words)) {
+        switch (words.typeOfLine) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
@@ -24,7 +25,8 @@ int main() {
                 sortWords(&(thisLine.words));
                 sortNumbers(&(thisLine.numbers));
 
-                pushBackLineArray(&lines, thisLine);
+                addOne(&lines);
+                lines.T.lines[lines.size - 1] = thisLine;
                 break;
             }
             case 1:     //comment/empty line - nothing to do
@@ -55,7 +57,7 @@ int main() {
             printf("\n");
         }
     }
-
-    killLineArray(&lines);*/
+    */
+    killLineArray(&lines);
     killMatrix(&words);
 }
