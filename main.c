@@ -4,6 +4,7 @@
 #include "input.h"
 #include "array.h"
 #include "my-string.h"
+#include "line.h"
 
 int main() {
     int numberOfLines = 0;
@@ -13,12 +14,12 @@ int main() {
     while(readLine(&words)>0) {
         numberOfLines++;
         
-       /* switch (getType(words)) {
+        switch (getType(words)) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
                 
-                lowerCapitalisation(&(thisLine.words));
+                lowerCapitalisation(thisLine.words);
 
                 sortWords(&(thisLine.words));
                 sortNumbers(&(thisLine.numbers));
@@ -32,7 +33,7 @@ int main() {
             case 2:     //error line
                 fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
-        }*/
+        }
 
         clearWords(&words);
     }
