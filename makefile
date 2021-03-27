@@ -4,10 +4,15 @@ CFLAGS = -Wall -Wextra -std=c11
 .c.o:
 	gcc $(CFLAGS) -c $<
 
-all: program
+all: program test
+
+test: test.o
+	gcc -o test test.o
 
 program: main.o mystring.o mystring-matrix.o input.o double-array.o line.o line-array.o
 	gcc -o program main.o mystring.o mystring-matrix.o input.o double-array.o line.o line-array.o
+
+test.o: test.c test.h
 
 mystring.o: mystring.c mystring.h
 double-array.o: double-array.c double-array.h
