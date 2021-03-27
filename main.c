@@ -15,7 +15,7 @@ int main() {
     while(readLine(&words)>0) {
         numberOfLines++;
         
-        switch (words.typeOfLine) {
+        /*switch (words.typeOfLine) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
@@ -35,7 +35,7 @@ int main() {
             case 2:     //error line
                 fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
-        }
+        }*/
 
         clearWords(&words);
     }

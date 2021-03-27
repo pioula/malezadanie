@@ -53,7 +53,7 @@ int readLine(array *lineOfWords) { //zwraca 1 jezeli udalo sie wczytac -1 w prze
 
     addOne(&wholeLine);
     wholeLine.T.letters[wholeLine.size - 1] = '\n'; //zapewnia wejscie do linii 32
-
+    
     splitToWords(wholeLine, lineOfWords);
 
     if (lineOfWords->size == 0 && lineOfWords->typeOfLine == 0)

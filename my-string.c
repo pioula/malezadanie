@@ -8,6 +8,7 @@
 
 void pushBackWord(array *t, array word) {     //wrzuca na sam koniec element c
     reallocMemory(t);  
+
     if (t->maxNumberOfElements <= t->size) 
         t->T.matrix[t->size] = newArray(sizeof(char));
 
@@ -28,7 +29,7 @@ void clearString(array *t) {     //czysci cala tablice
 
 void clearWords(array *words) {     //czysci cala tablice
     for (int i = 0; i < words->size; i++) {
-        clearString(words->T.matrix);
+        clearString(&(words->T.matrix[i]));
     }
     words->size = 0;
     words->typeOfLine = 0;
