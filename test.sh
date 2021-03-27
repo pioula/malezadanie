@@ -15,7 +15,7 @@ for f in $MYPATH/*.in;
 do
     echo -n "TEST $f ";
     time($PROGRAM < "$f" > $OUT 2> $ERR;)
-    if diff "${f%in}out" "$OUT" && diff "${f%in}err" "$ERR";
+    if diff "${f%in}out" "$OUT" >diff.diff && diff "${f%in}err" "$ERR" >diff.diff;
     then
         echo "PASSED";
     else
