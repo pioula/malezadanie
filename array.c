@@ -13,6 +13,11 @@ struct Line;
 
 typedef struct Line line;
 
+static void allocationTest (void *ptr) {
+    if (ptr == NULL)
+        exit(1);
+}
+
 array newArray(size_t type) {
     array new;
     new.size = 0;
@@ -20,7 +25,9 @@ array newArray(size_t type) {
     new.type = type;
     new.typeOfLine = 0;
     new.maxNumberOfElements = 0;
-    new.T.memory = (void *)malloc(new.allocatedMemory * type);
+    new.T.memory = malloc(new.allocatedMemory * type);
+    
+    allocationTest(new.T.memory);
 
     return new;
 }
@@ -29,6 +36,8 @@ void reallocMemory(array *t) {      //Sprawdza czy skonczyla sie pamiec, jesli t
     if (t->size >= (int)t->allocatedMemory) {
         t->allocatedMemory *= 2;
         t->T.memory = realloc(t->T.memory, t->allocatedMemory * t->type);
+
+        allocationTest(t->T.memory);
     }
 }
 

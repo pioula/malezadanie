@@ -1,6 +1,6 @@
 *.o
 *.in
-program
+similar_lines
 test
 settings.json
 *.txt

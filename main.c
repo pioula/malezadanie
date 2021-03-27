@@ -60,4 +60,5 @@ int main() {
 
     killLineArray(&lines);
     killMatrix(&words);
+    exit(0);
 }
