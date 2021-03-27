@@ -1,7 +1,6 @@
 *.o
 *.in
 program
-test.c
 test
 settings.json
 *.txt
