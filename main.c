@@ -14,8 +14,8 @@ int main() {
     
     while(readLine(&words)>0) {
         numberOfLines++;
-        
-        /*switch (words.typeOfLine) {
+
+        switch (words.typeOfLine) {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
@@ -35,21 +35,21 @@ int main() {
             case 2:     //error line
                 fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
-        }*/
+        }
 
         clearWords(&words);
     }
 
-    /*for (int i = 0; i < sizeLineArray(lines); i++) {
-        if (getLine(lines, i).isWritten < 0) {
-            printf("%d ",getLine(lines, i).row);
-            lines.T[i].isWritten = 1;
+    for (int i = 0; i < lines.size; i++) {
+        if (lines.T.lines[i].isWritten < 0) {
+            printf("%d ",lines.T.lines[i].row);
+            lines.T.lines[i].isWritten = 1;
 
-            for (int j = i + 1; j < sizeLineArray(lines); j++) {
-                if (getLine(lines, j).isWritten < 0) {
-                    if (compareLines(getLine(lines, i), getLine(lines, j)) > 0) {
-                        printf("%d ",getLine(lines, j).row);
-                        lines.T[j].isWritten = 1;
+            for (int j = i + 1; j < lines.size; j++) {
+                if (lines.T.lines[j].isWritten < 0) {
+                    if (compareLines(lines.T.lines[i], lines.T.lines[j]) > 0) {
+                        printf("%d ",lines.T.lines[j].row);
+                        lines.T.lines[j].isWritten = 1;
                     }
                 }
             }
@@ -57,7 +57,7 @@ int main() {
             printf("\n");
         }
     }
-    */
+
     killLineArray(&lines);
     killMatrix(&words);
 }

@@ -36,8 +36,14 @@ static bool isNumber(array word, long double *number) {
 
     if (word.T.letters[0] == '0') {
         unsigned long long unsignedOct = strtoull(word.T.letters, &endptr, 8);
-        if(endptr == word.T.letters + word.size- 1) {
+        if(endptr == word.T.letters + word.size - 1) {
             *number = (long double)unsignedOct;
+            return !isNaN(*number);
+        }
+
+        unsigned long long unsignedDec = strtoull(word.T.letters, &endptr, 10);
+        if(endptr == word.T.letters + word.size - 1) {
+            *number = (long double)unsignedDec;
             return !isNaN(*number);
         }
 
