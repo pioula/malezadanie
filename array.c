@@ -21,7 +21,7 @@ static void allocationTest (void *ptr) {
 array newArray(size_t type) {
     array new;
     new.size = 0;
-    new.allocatedMemory = 1;
+    new.allocatedMemory = 16;
     new.type = type;
     new.typeOfLine = 0;
     new.maxNumberOfElements = 0;
