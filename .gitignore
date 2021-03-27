@@ -4,3 +4,5 @@ similar_lines
 test
 settings.json
 *.txt
+*.err
+*.out
