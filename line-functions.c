@@ -52,16 +52,12 @@ static bool isNumber(array word, long double *number) {
         unsigned long long unsignedOct = strtoull(word.T.letters, &endptr, 8);
         if(endptr == word.T.letters + word.size - 1) {
             *number = (long double)unsignedOct;
-            //printf("xd: %Lf\n",*number);
-            //puts("Oct");
             return !isNaN(*number);
         }
 
         unsigned long long unsignedDec = strtoull(word.T.letters, &endptr, 10);
-        //printf("lol %lld",unsignedDec);
         if(endptr == word.T.letters + word.size - 1) {
             *number = (long double)unsignedDec;
-          //  puts("DEC");
             return !isNaN(*number);
         }
 
@@ -70,8 +66,6 @@ static bool isNumber(array word, long double *number) {
             if (word.size > 1) {
                 if (word.T.letters[1] == 'x' || word.T.letters[1] == 'X' ) {    
                     *number = (long double)unsignedHex;
-                    //printf("xd: %Lf\n",*number);
-            //        puts("HEX");
                     return !isNaN(*number);
                 }
             }
@@ -80,7 +74,6 @@ static bool isNumber(array word, long double *number) {
         if (word.size == 3) { //0x
             if (word.T.letters[0] == '0' && (word.T.letters[1] == 'x' || word.T.letters[1] == 'X')) {
                 *number = (long double)0;
-              //  puts("DU{S");
                 return true;
             }
         }
@@ -91,10 +84,8 @@ static bool isNumber(array word, long double *number) {
         
 
     long double anyNumber = strtold(word.T.letters, &endptr);
-    //printf("xd: %Lf\n",anyNumber);
     if(endptr == word.T.letters + word.size - 1) {
         *number = anyNumber;
-        //puts("ANY");
         return !isNaN(*number);
     }
 
@@ -119,23 +110,58 @@ line separateNumbersFromWords(array words) {
     return thisLine;
 }
 
-int compareLines (line firstLine, line secondLine) {
-    if (firstLine.words.size != secondLine.words.size
-    || firstLine.numbers.size != secondLine.numbers.size) {
-        return -1;
-    }
+int compareLines(const void *a, const void *b) {
+    line firstLine = *((line *)a);
+    line secondLine = *((line *)b);
+
+    if (firstLine.words.size != secondLine.words.size)
+        return firstLine.words.size - secondLine.words.size;
+
+    if (firstLine.numbers.size != secondLine.numbers.size)
+        return firstLine.numbers.size - secondLine.numbers.size;
 
     for (int i = 0; i < firstLine.words.size; i++) {
-        if (compareWords(&(firstLine.words.T.matrix[i]), &(secondLine.words.T.matrix[i])) != 0) {
-            return -1;
+        int tmp = compareWords(&(firstLine.words.T.matrix[i]), &(secondLine.words.T.matrix[i]));
+        if (tmp != 0) {
+            return tmp;
         }
     }
 
     for (int i = 0; i < firstLine.numbers.size; i++) {
         if (firstLine.numbers.T.numbers[i] != secondLine.numbers.T.numbers[i]) {
-            return -1;
+            if (firstLine.numbers.T.numbers[i] < secondLine.numbers.T.numbers[i]) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
         }
     }
 
-    return 1;
+    return 0;
+}
+
+void sortLines(array *lines) {
+    qsort(lines->T.lines, lines->size, sizeof(line), compareLines); 
+}
+
+array findSimilarLines(int *i, array lines) {
+    array row = newArray(sizeof(int));
+    addOne(&row);
+    row.T.integers[row.size - 1] = lines.T.lines[*i].row;
+    
+    int comparingLine = *i;
+    (*i)++;
+    if (*i < lines.size) {
+        while (compareLines(&(lines.T.lines[comparingLine]), &(lines.T.lines[*i])) == 0) {
+            addOne(&row);
+            row.T.integers[row.size - 1] = lines.T.lines[*i].row;
+            (*i)++;
+            
+            if (*i >= lines.size)
+                break;
+        }
+    }
+
+    return row;    
 }

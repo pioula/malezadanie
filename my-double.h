@@ -4,4 +4,8 @@
 
 void sortNumbers(array *numbers);
 
+void sortIntegers(array *integers);
+
+void sortRows(array *rows);
+
 #endif /* MY_DOUBLE_H */

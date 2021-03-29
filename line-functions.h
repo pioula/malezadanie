@@ -10,6 +10,10 @@ void killLineArray(array *t);
 
 line separateNumbersFromWords(array words);
 
-int compareLines (line firstLine, line secondLine);
+int compareLines(const void *a, const void *b);
+
+void sortLines(array *lines);
+
+array findSimilarLines(int *i, array lines);
 
 #endif /* WORDS_H */

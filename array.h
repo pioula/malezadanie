@@ -13,9 +13,10 @@ typedef struct Array array;
 union type_t{
     array *matrix;
     void *memory;
-    char* letters;
-    long double* numbers;
+    char *letters;
+    long double *numbers;
     line *lines;
+    int *integers;
 };
 
 typedef union type_t type_t; 

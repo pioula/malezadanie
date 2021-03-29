@@ -6,3 +6,4 @@ settings.json
 *.txt
 *.err
 *.out
+*diff

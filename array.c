@@ -21,7 +21,7 @@ static void allocationTest (void *ptr) {
 array newArray(size_t type) {
     array new;
     new.size = 0;
-    new.allocatedMemory = 16;
+    new.allocatedMemory = 8;
     new.type = type;
     new.typeOfLine = 0;
     new.maxNumberOfElements = 0;
@@ -44,6 +44,8 @@ void reallocMemory(array *t) {      //Sprawdza czy skonczyla sie pamiec, jesli t
 void addOne(array *t) {     //wrzuca na sam koniec element c
     reallocMemory(t);
     t->size++;
+    if (t->size > t->maxNumberOfElements)
+        t->maxNumberOfElements = t->size;
 }
 
 void killArray(array *t) {      //usuwa tablice z pamieci

@@ -11,7 +11,8 @@ int main() {
     int numberOfLines = 0;
     array lines = newArray(sizeof(line)); 
     array words = newArray(sizeof(array));
-    
+    array output = newArray(sizeof(array));
+
     while(readLine(&words)>0) {
         numberOfLines++;
 
@@ -38,25 +39,30 @@ int main() {
 
         clearWords(&words);
     }
-    
-    for (int i = 0; i < lines.size; i++) {
-        if (lines.T.lines[i].isWritten < 0) {
-            printf("%d",lines.T.lines[i].row);
-            lines.T.lines[i].isWritten = 1;
 
-            for (int j = i + 1; j < lines.size; j++) {
-                if (lines.T.lines[j].isWritten < 0) {
-                    if (compareLines(lines.T.lines[i], lines.T.lines[j]) > 0) {
-                        printf(" %d",lines.T.lines[j].row);
-                        lines.T.lines[j].isWritten = 1;
-                    }
-                }
-            }
+    sortLines(&lines);
 
-            printf("\n");
-        }
+    int i = 0;
+    while ( i < lines.size) {
+        addOne(&output);
+        output.T.matrix[output.size - 1] = findSimilarLines(&i, lines);
+
+        sortIntegers(&(output.T.matrix[output.size - 1]));        
     }
 
+    sortRows(&output);
+
+    for (int i = 0; i < output.size; i++) {
+        printf("%d",output.T.matrix[i].T.integers[0]);
+
+        for (int j = 1; j < output.T.matrix[i].size; j++) {
+             printf(" %d",output.T.matrix[i].T.integers[j]);
+        }
+
+        printf("\n");
+    }
+    
+    killMatrix(&output);
     killLineArray(&lines);
     killMatrix(&words);
     exit(0);
