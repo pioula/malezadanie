@@ -41,9 +41,14 @@ static void lowerWord(array word) {
     }
 }
 
+static int min (int x, int y) {
+    if (x > y) return y;
+    else return x;
+}
+
 int compareWords(const void *a, const void *b) 
 {
-    return memcmp(((array *)a)->T.letters, ((array *)b)->T.letters, (((array *)a)->size)-1);
+    return memcmp(((array *)a)->T.letters, ((array *)b)->T.letters, min(((array *)a)->size,((array *)b)->size));
 }
 
 
