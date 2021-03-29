@@ -124,7 +124,7 @@ int compareLines (line firstLine, line secondLine) {
     || firstLine.numbers.size != secondLine.numbers.size) {
         return -1;
     }
-    
+
     for (int i = 0; i < firstLine.words.size; i++) {
         if (compareWords(&(firstLine.words.T.matrix[i]), &(secondLine.words.T.matrix[i])) != 0) {
             return -1;

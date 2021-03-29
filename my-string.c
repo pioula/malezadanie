@@ -42,8 +42,8 @@ static void lowerWord(array word) {
 }
 
 int compareWords(const void *a, const void *b) 
-{  
-    return memcmp(((array *)a)->T.letters, ((array *)b)->T.letters, (((array *)a)->size));
+{
+    return memcmp(((array *)a)->T.letters, ((array *)b)->T.letters, (((array *)a)->size)-1);
 }
 
 

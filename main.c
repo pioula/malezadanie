@@ -19,7 +19,6 @@ int main() {
             case 0:  {   //comparable line
                 line thisLine = separateNumbersFromWords(words);
                 thisLine.row = numberOfLines;
-                
                 lowerCapitalisation(thisLine.words);
 
                 sortWords(&(thisLine.words));
@@ -39,7 +38,7 @@ int main() {
 
         clearWords(&words);
     }
-
+    
     for (int i = 0; i < lines.size; i++) {
         if (lines.T.lines[i].isWritten < 0) {
             printf("%d",lines.T.lines[i].row);
