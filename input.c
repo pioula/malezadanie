@@ -14,6 +14,24 @@ static int checkType(char letter, int position) {
 }
 
 static void splitToWords(array line, array *words) {
+    int firstCharacter = 0;
+
+    for (int i = 0; i < line.size; i++) {
+        int type = checkType(line.T.letters[i], i); 
+
+        if (type != 0) {
+            words->typeOfLine = type;
+            break;
+        }
+        else if (isspace(line.T.letters[i])) {
+            pushBackPartOfWord(words, line, firstCharacter, i);
+            
+            firstCharacter = i + 1;            
+        }
+    }
+}
+
+/*static void splitToWords(array line, array *words) {
     
     array word = newArray(sizeof(char));
     
@@ -24,7 +42,7 @@ static void splitToWords(array line, array *words) {
             words->typeOfLine = type;
             break;
         }
-        else if ((9 <= line.T.letters[i] && line.T.letters[i] <= 13) || line.T.letters[i] == ' ') {
+        else if (isspace(line.T.letters[i])) {
             if (word.size > 0) {
                 addOne(&word);
                 word.T.letters[word.size-1] = '\0';
@@ -39,7 +57,7 @@ static void splitToWords(array line, array *words) {
     }
 
     killArray(&word);
-}
+}*/
 
 int readLine(array *lineOfWords) { //zwraca 1 jezeli udalo sie wczytac -1 w przeciwnym przypadku
     array wholeLine = newArray(sizeof(char));

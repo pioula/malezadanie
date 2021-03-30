@@ -7,10 +7,10 @@
 #include "array.h"
 
 void pushBackWord(array *t, array word) {     //wrzuca na sam koniec element c
-    reallocMemory(t);  
-
-    if (t->maxNumberOfElements <= t->size) 
+    if (t->maxNumberOfElements <= t->size) {
+        reallocMemory(t);
         t->T.matrix[t->size] = newArray(sizeof(char));
+    }
 
     if ((int)t->T.matrix[t->size].allocatedMemory <= word.size) {
         t->T.matrix[t->size].allocatedMemory = word.size * 2;
@@ -20,6 +20,32 @@ void pushBackWord(array *t, array word) {     //wrzuca na sam koniec element c
     memcpy(t->T.matrix[t->size].T.letters, word.T.letters, word.size);
 
     t->T.matrix[t->size].size = word.size;
+    
+    t->size++;
+    if (t->maxNumberOfElements < t->size)
+        t->maxNumberOfElements = t->size;
+}
+
+void pushBackPartOfWord(array *t, array word, int begin, int end) {
+    if (begin >= end)
+        return;
+
+    if (t->maxNumberOfElements <= t->size) {
+        reallocMemory(t);
+        t->T.matrix[t->size] = newArray(sizeof(char));
+    }
+
+    if ((int)t->T.matrix[t->size].allocatedMemory <= end - begin + 1) {
+        t->T.matrix[t->size].allocatedMemory = (end - begin + 1) * 2;
+        t->T.matrix[t->size].T.memory = realloc(t->T.matrix[t->size].T.memory, t->T.matrix[t->size].allocatedMemory * t->T.matrix[t->size].type);
+    }
+
+    for (int i = begin; i < end; i++) {
+        t->T.matrix[t->size].T.letters[i - begin] = word.T.letters[i];
+    }
+    t->T.matrix[t->size].T.letters[end - begin] = '\0';
+
+    t->T.matrix[t->size].size = end - begin + 1;
 
     t->size++;
     if (t->maxNumberOfElements < t->size)

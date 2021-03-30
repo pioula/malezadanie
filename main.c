@@ -33,7 +33,7 @@ int main() {
                 
                 break;
             case 2:     //error line
-                fprintf(stderr, "ERROR %d\n",numberOfLines);
+                //fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
         }
 

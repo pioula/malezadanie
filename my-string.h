@@ -9,6 +9,8 @@
 
 void pushBackWord(array *t, array word);
 
+void pushBackPartOfWord(array *t, array word, int begin, int end);
+
 void clearString(array *t);
 
 void clearWords(array *words);
