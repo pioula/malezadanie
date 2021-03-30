@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <errno.h>
 #include "my-string.h"
 #include "array.h"
 
@@ -97,6 +98,10 @@ void sortWords(array *words)
 
 int readString(array *t) {
     int length = getline(&(t->T.letters),&(t->allocatedMemory),stdin);
+
+    if (ferror(stdin)) {
+        exit(1);
+    }
     t->size = length;
     return length;
 }
