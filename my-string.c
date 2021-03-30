@@ -12,10 +12,14 @@ void pushBackWord(array *t, array word) {     //wrzuca na sam koniec element c
     if (t->maxNumberOfElements <= t->size) 
         t->T.matrix[t->size] = newArray(sizeof(char));
 
-    for (int i = 0; i < word.size; i++) {
-        addOne(&(t->T.matrix[t->size]));
-        t->T.matrix[t->size].T.letters[i] = word.T.letters[i];
+    if ((int)t->T.matrix[t->size].allocatedMemory <= word.size) {
+        t->T.matrix[t->size].allocatedMemory = word.size * 2;
+        t->T.matrix[t->size].T.memory = realloc(t->T.matrix[t->size].T.memory, t->T.matrix[t->size].allocatedMemory * t->T.matrix[t->size].type);
     }
+
+    memcpy(t->T.matrix[t->size].T.letters, word.T.letters, word.size);
+
+    t->T.matrix[t->size].size = word.size;
 
     t->size++;
     if (t->maxNumberOfElements < t->size)
