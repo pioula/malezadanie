@@ -13,6 +13,7 @@ struct Line;
 
 typedef struct Line line;
 
+//checks if allocation succeded, ptr - dynamic array
 static void allocationTest (void *ptr) {
     if (ptr == NULL)
         exit(1);
@@ -23,7 +24,7 @@ array newArray(size_t type) {
     new.size = 0;
     new.allocatedMemory = 8;
     new.type = type;
-    new.typeOfLine = 0;
+    new.typeOfLine = 0; //initially all of the lines are correct
     new.maxNumberOfElements = 0;
     new.T.memory = malloc(new.allocatedMemory * type);
     
@@ -32,7 +33,7 @@ array newArray(size_t type) {
     return new;
 }
 
-void reallocMemory(array *t) {      //Sprawdza czy skonczyla sie pamiec, jesli tak to podwaja ja
+void reallocMemory(array *t) {
     if (t->size >= (int)t->allocatedMemory) {
         t->allocatedMemory *= 2;
         t->T.memory = realloc(t->T.memory, t->allocatedMemory * t->type);
@@ -41,19 +42,19 @@ void reallocMemory(array *t) {      //Sprawdza czy skonczyla sie pamiec, jesli t
     }
 }
 
-void addOne(array *t) {     //wrzuca na sam koniec element c
+void addOneMemorySpace(array *t) {     
     reallocMemory(t);
     t->size++;
     if (t->size > t->maxNumberOfElements)
         t->maxNumberOfElements = t->size;
 }
 
-void killArray(array *t) {      //usuwa tablice z pamieci
+void killArray(array *t) {     
     free(t->T.memory);
 }
 
 
-void killMatrix(array *t) {      //usuwa tablice z pamieci
+void killMatrix(array *t) {     
     for (int i = 0; i < (int)t->maxNumberOfElements; i++) {
         killArray(&(t->T.matrix[i]));
     }

@@ -14,12 +14,12 @@ MYPATH=$2;
 for f in $MYPATH/*.in;
 do
     echo -n "TEST $f ";
-    #time($PROGRAM < "$f" > $OUT 2> $ERR);
-    valgrind --error-exitcode=123 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all $PROGRAM < "$f" > $OUT;
-    #if diff "${f%in}out" "$OUT" >diff.diff && diff "${f%in}err" "$ERR" >diff.diff;
-    #then
-    #    echo "PASSED";
-    #else
-    #    echo "FAILED";
-    #fi;
+    time($PROGRAM < "$f" > $OUT 2> $ERR);
+    #valgrind --error-exitcode=123 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all $PROGRAM < "$f" > $OUT;
+    if diff "${f%in}out" "$OUT" >diff.diff && diff "${f%in}err" "$ERR" >diff.diff;
+    then
+        echo "PASSED";
+    else
+        echo "FAILED";
+    fi;
 done;

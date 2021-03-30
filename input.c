@@ -3,6 +3,12 @@
 #include "array.h"
 #include "my-string.h"
 
+/*
+    letter - char
+    position - position of letter in string
+    checks if letter is incorrect and then returns 2, or is the first character # 
+    if it's then it's comment then and we have to return 1
+*/
 static int checkType(char letter, int position) {
     if (position == 0 && letter == '#') 
         return 1;
@@ -13,30 +19,29 @@ static int checkType(char letter, int position) {
     return 0;
 }
 
-static void splitToWords(array line, array *words) {
+void splitLineBySpaces(array *lineOfWords, array inputLine) { 
+    addOneMemorySpace(&inputLine);
+
+    //allows to put last word of line into lineOfWord
+    inputLine.T.letters[inputLine.size - 1] = '\n';
+
     int firstCharacter = 0;
 
-    for (int i = 0; i < line.size; i++) {
-        int type = checkType(line.T.letters[i], i); 
+    for (int i = 0; i < inputLine.size; i++) {
+        int type = checkType(inputLine.T.letters[i], i); 
 
-        if (type != 0) {
-            words->typeOfLine = type;
+        if (type != 0) { //if the line is comment or if it is incorrect we can leave
+            lineOfWords->typeOfLine = type;
             break;
         }
-        else if (isspace(line.T.letters[i])) {
-            pushBackPartOfWord(words, line, firstCharacter, i);
+        else if (isspace(inputLine.T.letters[i])) {
+            pushBackPartOfWord(lineOfWords, inputLine, firstCharacter, i);
             
             firstCharacter = i + 1;            
         }
     }
-}
 
-void readLine(array *lineOfWords, array inputLine) { //zwraca 1 jezeli udalo sie wczytac -1 w przeciwnym przypadku
-    addOne(&inputLine);
-    inputLine.T.letters[inputLine.size - 1] = '\n'; //zapewnia wejscie do linii 32
-    
-    splitToWords(inputLine, lineOfWords);
-
+    //if inputLine contains only spaces then it is type of 1
     if (lineOfWords->size == 0 && lineOfWords->typeOfLine == 0)
         lineOfWords->typeOfLine = 1;        
 }

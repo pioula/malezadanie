@@ -6,14 +6,14 @@
 #include "my-string.h"
 #include "array.h"
 
-void pushBackWord(array *t, array word) {     //wrzuca na sam koniec element c
+void pushBackWord(array *t, array word) {
     if (t->maxNumberOfElements <= t->size) {
         reallocMemory(t);
         t->T.matrix[t->size] = newArray(sizeof(char));
     }
 
     if ((int)t->T.matrix[t->size].allocatedMemory <= word.size) {
-        t->T.matrix[t->size].allocatedMemory = word.size * 2;
+        t->T.matrix[t->size].allocatedMemory = word.size * 2; 
         t->T.matrix[t->size].T.memory = realloc(t->T.matrix[t->size].T.memory, t->T.matrix[t->size].allocatedMemory * t->T.matrix[t->size].type);
     }
 
@@ -43,6 +43,7 @@ void pushBackPartOfWord(array *t, array word, int begin, int end) {
     for (int i = begin; i < end; i++) {
         t->T.matrix[t->size].T.letters[i - begin] = word.T.letters[i];
     }
+    //we put '\0' at the end in case of preventing running out of allocated space
     t->T.matrix[t->size].T.letters[end - begin] = '\0';
 
     t->T.matrix[t->size].size = end - begin + 1;
@@ -52,12 +53,12 @@ void pushBackPartOfWord(array *t, array word, int begin, int end) {
         t->maxNumberOfElements = t->size;
 }
 
-void clearString(array *t) {     //czysci cala tablice
+void clearString(array *t) {
     t->T.letters = memset(t->T.letters,0,t->size * sizeof(char));
     t->size = 0;
 }
 
-void clearWords(array *words) {     //czysci cala tablice
+void clearWords(array *words) {
     for (int i = 0; i < words->size; i++) {
         clearString(&(words->T.matrix[i]));
     }
@@ -65,6 +66,7 @@ void clearWords(array *words) {     //czysci cala tablice
     words->typeOfLine = 0;
 }
 
+//changes all letters of word to lowercase
 static void lowerWord(array word) {
     for (int i = 0; i < word.size; ++i) {
         word.T.letters[i] = tolower(word.T.letters[i]);
@@ -93,15 +95,8 @@ void sortWords(array *words)
     qsort(words->T.matrix, words->size, sizeof(array), compareWords); 
 } 
 
-int readString(array *t) {     //wczytuje tablice z wejscia i zwraca jej dlugosc
+int readString(array *t) {
     int length = getline(&(t->T.letters),&(t->allocatedMemory),stdin);
     t->size = length;
     return length;
-}
-
-void printString(array t) {
-    for(int i = 0; i < t.size; i++) {
-        printf("%c",t.T.letters[i]);
-    }
-    puts("");
 }

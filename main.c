@@ -7,34 +7,36 @@
 #include "line-functions.h"
 #include "my-double.h"
 
+/* Program that reads lines of words form input file
+and output the numbers of similar lines */
 int main() {
     int numberOfLines = 0;
-    array lines = newArray(sizeof(line)); //store all of the lines
-    array words = newArray(sizeof(array)); //line of words
-    array output = newArray(sizeof(array)); 
+    array lines = newArray(sizeof(line)); 
+    array words = newArray(sizeof(array)); 
+    array output = newArray(sizeof(array));
     array inputLine = newArray(sizeof(char));
 
-    while(readString(&inputLine)>0) {
-        readLine(&words, inputLine);
+    while(readString(&inputLine) > 0) {
+        splitLineBySpaces(&words, inputLine);
         numberOfLines++;
 
-        switch (words.typeOfLine) {
-            case 0:  {   //comparable line
-                line thisLine = separateNumbersFromWords(words);
-                thisLine.row = numberOfLines;
+        switch (words.typeOfLine) { 
+            case 0:  {   //correct line
+                line thisLine = separateNumbersFromWords(words); 
+                thisLine.lineNumber = numberOfLines;
                 lowerCapitalisation(thisLine.words);
 
                 sortWords(&(thisLine.words));
                 sortNumbers(&(thisLine.numbers));
 
-                addOne(&lines);
+                addOneMemorySpace(&lines);
                 lines.T.lines[lines.size - 1] = thisLine;
                 break;
             }
             case 1:     //comment/empty line - nothing to do
                 
                 break;
-            case 2:     //error line
+            case 2:     //incorrect line
                 fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
         }
@@ -46,7 +48,7 @@ int main() {
 
     int i = 0;
     while ( i < lines.size) {
-        addOne(&output);
+        addOneMemorySpace(&output);
         output.T.matrix[output.size - 1] = findSimilarLines(&i, lines);
 
         sortIntegers(&(output.T.matrix[output.size - 1]));        

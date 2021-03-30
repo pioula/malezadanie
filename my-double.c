@@ -1,6 +1,7 @@
 #include "array.h"
 #include "my-double.h"
 
+//takes two pointers a, b of long doubles and return their difference
 static int compareDouble(const void *a, const void *b) 
 {  
     return *((long double *)a) - *((long double *)b);
@@ -21,6 +22,7 @@ void sortIntegers(array *integers)
     qsort(integers->T.integers, integers->size, sizeof(int), compareInt);
 } 
 
+//takes two pointers of arrays of integers a, b and return difference of their first elements
 static int compareRows(const void *a, const void *b) 
 {  
     return (*((array *)a)).T.integers[0] - (*((array *)b)).T.integers[0];

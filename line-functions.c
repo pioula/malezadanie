@@ -8,13 +8,12 @@ line newLine() {
     line new;
     new.words = newArray(sizeof(array));
     new.numbers = newArray(sizeof(long double));
-    new.row = -1;
-    new.isWritten = -1;
+    new.lineNumber = -1;
 
     return new;
 }
 
-void killLine(line *l) {      //usuwa tablice z pamieci
+void killLine(line *l) {
     killArray(&(l->numbers));
     killMatrix(&(l->words));
 }
@@ -28,15 +27,19 @@ void killLineArray(array *t) {      //usuwa tablice z pamieci
 }
 
 static bool isNaN (long double number) {
+    //if number != number then number is NaN
     return number != number;
 }
 
+//if word can still be a number then returns false, otherwise true
 static bool checkForHexError (array word) {
+    //if stroull for hexadecimal test fails then if there is 'x' or 'X' on 1 position then it cannot be a number
     if (word.size > 1) {
         if (word.T.letters[1] == 'x' || word.T.letters[1] == 'X' ) {
             return true;
         }
     }
+
     if (word.size > 2) {
         if (word.T.letters[2] == 'x' || word.T.letters[2] == 'X') {
             return true;
@@ -50,7 +53,7 @@ static bool isNumber(array word, long double *number) {
 
     if (word.T.letters[0] == '0') {
         unsigned long long unsignedOct = strtoull(word.T.letters, &endptr, 8);
-        if(endptr == word.T.letters + word.size - 1) {
+        if(endptr == word.T.letters + word.size - 1) { //checks if test passed
             *number = (long double)unsignedOct;
             return !isNaN(*number);
         }
@@ -71,7 +74,7 @@ static bool isNumber(array word, long double *number) {
             }
         }
 
-        if (word.size == 3) { //0x
+        if (word.size == 3) { //corner case for "0x"
             if (word.T.letters[0] == '0' && (word.T.letters[1] == 'x' || word.T.letters[1] == 'X')) {
                 *number = (long double)0;
                 return true;
@@ -99,7 +102,7 @@ line separateNumbersFromWords(array words) {
         long double number = 0;
 
         if (isNumber(words.T.matrix[i], &number)) {
-            addOne(&(thisLine.numbers));
+            addOneMemorySpace(&(thisLine.numbers));
             thisLine.numbers.T.numbers[thisLine.numbers.size - 1] = number;
         }
         else {
@@ -147,15 +150,15 @@ void sortLines(array *lines) {
 
 array findSimilarLines(int *i, array lines) {
     array row = newArray(sizeof(int));
-    addOne(&row);
-    row.T.integers[row.size - 1] = lines.T.lines[*i].row;
+    addOneMemorySpace(&row);
+    row.T.integers[row.size - 1] = lines.T.lines[*i].lineNumber;
     
     int comparingLine = *i;
     (*i)++;
     if (*i < lines.size) {
         while (compareLines(&(lines.T.lines[comparingLine]), &(lines.T.lines[*i])) == 0) {
-            addOne(&row);
-            row.T.integers[row.size - 1] = lines.T.lines[*i].row;
+            addOneMemorySpace(&row);
+            row.T.integers[row.size - 1] = lines.T.lines[*i].lineNumber;
             (*i)++;
             
             if (*i >= lines.size)
