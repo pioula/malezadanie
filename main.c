@@ -9,11 +9,13 @@
 
 int main() {
     int numberOfLines = 0;
-    array lines = newArray(sizeof(line)); 
-    array words = newArray(sizeof(array));
-    array output = newArray(sizeof(array));
+    array lines = newArray(sizeof(line)); //store all of the lines
+    array words = newArray(sizeof(array)); //line of words
+    array output = newArray(sizeof(array)); 
+    array inputLine = newArray(sizeof(char));
 
-    while(readLine(&words)>0) {
+    while(readString(&inputLine)>0) {
+        readLine(&words, inputLine);
         numberOfLines++;
 
         switch (words.typeOfLine) {
@@ -33,7 +35,7 @@ int main() {
                 
                 break;
             case 2:     //error line
-                //fprintf(stderr, "ERROR %d\n",numberOfLines);
+                fprintf(stderr, "ERROR %d\n",numberOfLines);
                 break;
         }
 
@@ -62,6 +64,7 @@ int main() {
         printf("\n");
     }
     
+    killArray(&inputLine);
     killMatrix(&output);
     killLineArray(&lines);
     killMatrix(&words);

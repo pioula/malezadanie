@@ -3,6 +3,6 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-int readLine(array *lineOfWords);
+void readLine(array *lineOfWords, array inputLine);
 
 #endif /* INPUT_H */
