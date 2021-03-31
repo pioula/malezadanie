@@ -15,7 +15,7 @@ for f in $MYPATH/*.in;
 do
     echo -n -e "\e[1m\e[94mTEST \e[0m$f ";
     time($PROGRAM < "$f" > $OUT 2> $ERR);
-    
+    echo $?;
     if diff "${f%in}out" "$OUT" >diff.diff && diff "${f%in}err" "$ERR";
     then
         echo -e "\e[1m\e[32mOK";
@@ -30,5 +30,5 @@ do
     else
         echo -e "\e[1m\e[31mFAILED";
     fi;
-
+    
 done;

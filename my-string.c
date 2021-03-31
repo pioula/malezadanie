@@ -1,4 +1,4 @@
-#define  _GNU_SOURCE
+#define  _GNU_SOURCE 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,6 +8,8 @@
 #include "array.h"
 
 void pushBackWord(array *t, array word) {
+    //if t->maxNumberOfElements > t->size then t->T.matrix[t->size] was
+    //already allocated
     if (t->maxNumberOfElements <= t->size) {
         reallocMemory(t);
         t->T.matrix[t->size] = newArray(sizeof(char));
@@ -98,10 +100,9 @@ void sortWords(array *words)
 
 int readString(array *t) {
     int length = getline(&(t->T.letters),&(t->allocatedMemory),stdin);
-
-    if (ferror(stdin)) {
+    if (errno == ENOMEM)
         exit(1);
-    }
+    
     t->size = length;
     return length;
 }
